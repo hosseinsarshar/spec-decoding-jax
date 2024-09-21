@@ -2,13 +2,15 @@ import jax
 import jax.numpy as jnp
 from transformers import FlaxAutoModelForCausalLM, AutoTokenizer
 import numpy as np
+import os
 
 # Load both models: the draft (smaller) and the verifier (larger)
 draft_model_name = "meta-llama/Llama-2-7b"  # e.g., "facebook/opt-1.3b"
 verifier_model_name = "meta-llama/Llama-2-13b"  # e.g., "facebook/opt-13b"
-
-draft_model = FlaxAutoModelForCausalLM.from_pretrained(draft_model_name)
-verifier_model = FlaxAutoModelForCausalLM.from_pretrained(verifier_model_name)
+hf_token = os.getenv("HF_TOKEN")
+print(f'{hf_token=}')
+draft_model = FlaxAutoModelForCausalLM.from_pretrained(draft_model_name, use_auth_token=hf_token)
+verifier_model = FlaxAutoModelForCausalLM.from_pretrained(verifier_model_name, use_auth_token=hf_token)
 
 tokenizer = AutoTokenizer.from_pretrained(draft_model_name)
 
