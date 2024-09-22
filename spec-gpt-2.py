@@ -55,6 +55,16 @@ torch_model_name = "gpt2"  # You can change this to any other model supported by
 torch_model, torch_tokenizer = torch_load_model_and_tokenizer(torch_model_name)
 torch_model.to(device)
 
+generated_texts = torch_generate_with_topk(
+    torch_model,
+    torch_tokenizer,
+    prompt,
+    max_length=200,
+    top_k=50,
+    temperature=0.7,
+    num_return_sequences=1
+)
+e = datetime.datetime.now()
 
 prompt = "Once upon a time"
 s = datetime.datetime.now()
