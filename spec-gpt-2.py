@@ -79,12 +79,14 @@ generated_texts = torch_generate_with_topk(
 e = datetime.datetime.now()
 print(f'The time before timeit [{1000*(e-s).total_seconds()}] ms')
 
-average_time_ms = timing_util.simple_timeit(torch_generate_with_topk, torch_model,
-    torch_tokenizer,
-    prompt,
-    max_length=200,
-    top_k=50,
-    temperature=0.7,
-    num_return_sequences=1, task='fsdp_feed_f')
+args = (torch_model, torch_tokenizer, prompt)
+kwargs = {
+    "max_length": 200,
+    "top_k": 50,
+    "temperature": 0.7,
+    "num_return_sequences": 1
+}
+
+average_time_ms = timing_util.simple_timeit(*args, **kwargs, task='fsdp_feed_f')
 
 print(f"{average_time_ms=}")
