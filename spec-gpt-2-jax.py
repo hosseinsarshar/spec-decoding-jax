@@ -91,4 +91,6 @@ num_return_sequences = 1
 # Pass everything as positional arguments (no kwargs)
 args = (model, tokenizer, prompt, max_length, top_k, temperature, num_return_sequences)
 
-timing_util.simple_timeit(generate_with_topk, *args, task='jax-decode')
+average_time = timing_util.simple_timeit(generate_with_topk, *args, task='jax-decode')
+
+print(f'{average_time=}')
