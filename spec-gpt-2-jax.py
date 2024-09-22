@@ -5,8 +5,8 @@ import datetime
 import timing_util
 
 def load_model_and_tokenizer(model_name):
-    model = FlaxAutoModelForCausalLM.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = FlaxAutoModelForCausalLM.from_pretrained(model_name, device_map = 'cuda')
+    tokenizer = AutoTokenizer.from_pretrained(model_name, device_map = 'cuda')
     return model, tokenizer
 
 def generate_with_topk(
