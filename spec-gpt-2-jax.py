@@ -5,8 +5,8 @@ import datetime
 import timing_util
 
 def load_model_and_tokenizer(model_name):
-    model = FlaxAutoModelForCausalLM.from_pretrained(model_name).to('cuda')
-    tokenizer = AutoTokenizer.from_pretrained(model_name).to('cuda')
+    model = FlaxAutoModelForCausalLM.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     return model, tokenizer
 
 def generate_with_topk(
@@ -55,6 +55,8 @@ def generate_with_topk(
 
 model_name = "gpt2"  # You can change this to any other model supported by Hugging Face
 model, tokenizer = load_model_and_tokenizer(model_name)
+
+breakpoint()
 
 prompt = "Once upon a time"
 s = datetime.datetime.now()
