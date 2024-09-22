@@ -81,6 +81,7 @@ generated_texts = generate_with_topk(
     num_return_sequences=1
 )
 e = datetime.datetime.now()
+
 print(f'The time to execute [{1000*(e-s).total_seconds()}] ms')
 
 max_length = 200
@@ -91,6 +92,6 @@ num_return_sequences = 1
 # Pass everything as positional arguments (no kwargs)
 args = (model, tokenizer, prompt, max_length, top_k, temperature, num_return_sequences)
 
-average_time = timing_util.simple_timeit(generate_with_topk, *args, task='jax-decode')
+average_time = timing_util.simple_timeit(generate_with_topk, *args, task='jax-decode', local=True)
 
 print(f'{average_time=}')
