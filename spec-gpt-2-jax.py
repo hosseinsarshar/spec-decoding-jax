@@ -71,8 +71,8 @@ print(f'Compile it in: [{1000*(e-s).total_seconds()}] ms')
 
 s = datetime.datetime.now()
 generated_texts = generate_with_topk(
-    torch_model,
-    torch_tokenizer,
+    model,
+    tokenizer,
     prompt,
     max_length=200,
     top_k=50,
