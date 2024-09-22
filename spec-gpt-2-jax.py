@@ -56,6 +56,7 @@ model_name = "gpt2"  # You can change this to any other model supported by Huggi
 model, tokenizer = load_model_and_tokenizer(model_name)
 
 prompt = "Once upon a time"
+s = datetime.datetime.now()
 generated_texts = generate_with_topk(
     model,
     tokenizer,
@@ -65,9 +66,11 @@ generated_texts = generate_with_topk(
     temperature=0.7,
     num_return_sequences=1
 )
+e = datetime.datetime.now()
+print(f'Compile it in: [{1000*(e-s).total_seconds()}] ms')
 
 s = datetime.datetime.now()
-generated_texts = torch_generate_with_topk(
+generated_texts = generate_with_topk(
     torch_model,
     torch_tokenizer,
     prompt,
