@@ -51,9 +51,12 @@ def torch_generate_with_topk(
 
 # Example usage
 device = "cuda"
+print('Loading the model')
 torch_model_name = "gpt2"  # You can change this to any other model supported by Hugging Face
 torch_model, torch_tokenizer = torch_load_model_and_tokenizer(torch_model_name)
 torch_model.to(device)
+
+print('Compile it')
 
 prompt = "Once upon a time"
 s = datetime.datetime.now()
@@ -68,7 +71,6 @@ generated_texts = torch_generate_with_topk(
 )
 e = datetime.datetime.now()
 print(f'First execution [{1000*(e-s).total_seconds()}] ms')
-
 
 s = datetime.datetime.now()
 generated_texts = torch_generate_with_topk(
