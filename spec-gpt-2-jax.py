@@ -2,6 +2,7 @@ import jax
 import jax.numpy as jnp
 from transformers import AutoTokenizer, FlaxAutoModelForCausalLM
 import datetime
+import timing_util
 
 def load_model_and_tokenizer(model_name):
     model = FlaxAutoModelForCausalLM.from_pretrained(model_name)
