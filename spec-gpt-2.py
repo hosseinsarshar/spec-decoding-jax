@@ -1,5 +1,6 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import timing_util
 
 def torch_load_model_and_tokenizer(model_name):
     model = AutoModelForCausalLM.from_pretrained(model_name)
@@ -63,3 +64,13 @@ generated_texts = torch_generate_with_topk(
     temperature=0.7,
     num_return_sequences=1
 )
+
+average_time_ms = timing_util.simple_timeit(torch_generate_with_topk, torch_model,
+    torch_tokenizer,
+    prompt,
+    max_length=200,
+    top_k=50,
+    temperature=0.7,
+    num_return_sequences=1, task='fsdp_feed_f')
+
+print(f"{average_time_ms=}")
