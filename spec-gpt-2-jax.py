@@ -23,8 +23,8 @@ def generate_with_topk(
     print(jax.device_get(input_ids))
     
     # Create a function for generation
-    @jax.jit
     def generate_step(input_ids, key):
+        @jax.jit
         def sample_topk(logits):
             if top_k > 0:
                 top_k_logits, _ = jax.lax.top_k(logits, k=top_k)
